@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"os"
 
 	log "github.com/sirupsen/logrus"
 
@@ -36,12 +35,11 @@ func main() {
 	case "updater-auto":
 		err = assetfsProcessor.RunUpdateAuto()
 	default:
-		log.Error("Nothing to launch. Use --script flag to choose a script to run.")
+		log.Info("Nothing to launch. Use --script flag to choose a script to run.")
 	}
 
 	if err != nil {
-		log.WithError(err).Error()
-		os.Exit(1)
+		log.WithError(err).Fatal("Script failed")
 	}
 }
 
